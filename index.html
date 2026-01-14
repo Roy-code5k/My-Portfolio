@@ -18,9 +18,8 @@
 <body>
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
+    <canvas id="particle-canvas"></canvas>
     <div class="grain-overlay"></div>
-    <div class="bg-blob blob-1"></div>
-    <div class="bg-blob blob-2"></div>
 
     <main class="bento-container">
 
@@ -44,17 +43,21 @@
             <h3>Tech Arsenal</h3>
             <div class="marquee-wrapper">
                 <div class="marquee-content">
+                    <div class="stack-item"><i class="fab fa-html5"></i> <span>HTML</span></div>
+                    <div class="stack-item"><i class="fab fa-css3-alt"></i> <span>CSS</span></div>
                     <div class="stack-item"><i class="fab fa-python"></i> <span>Python</span></div>
                     <div class="stack-item"><i class="fab fa-js"></i> <span>JavaScript</span></div>
-                    <div class="stack-item"><i class="fab fa-react"></i> <span>React</span></div>
+                    <div class="stack-item"><i class="fab fa-cuttlefish"></i> <span>C++</span></div>
                     <div class="stack-item"><i class="fas fa-database"></i> <span>SQL</span></div>
                     <div class="stack-item"><i class="fas fa-bolt"></i> <span>Supabase</span></div>
                     <div class="stack-item"><i class="fab fa-envira"></i> <span>Django</span></div>
 
                     <!-- Duplicate for seamless loop -->
+                    <div class="stack-item"><i class="fab fa-html5"></i> <span>HTML</span></div>
+                    <div class="stack-item"><i class="fab fa-css3-alt"></i> <span>CSS</span></div>
                     <div class="stack-item"><i class="fab fa-python"></i> <span>Python</span></div>
                     <div class="stack-item"><i class="fab fa-js"></i> <span>JavaScript</span></div>
-                    <div class="stack-item"><i class="fab fa-react"></i> <span>React</span></div>
+                    <div class="stack-item"><i class="fab fa-cuttlefish"></i> <span>C++</span></div>
                     <div class="stack-item"><i class="fas fa-database"></i> <span>SQL</span></div>
                     <div class="stack-item"><i class="fas fa-bolt"></i> <span>Supabase</span></div>
                     <div class="stack-item"><i class="fab fa-envira"></i> <span>Django</span></div>
@@ -65,87 +68,149 @@
         <!-- Tile 3: The Athlete & Leader -->
         <div class="bento-tile tile-athlete">
             <h3>Beyond Code</h3>
-            <ul class="achievements-list">
-                <li>🏅 <strong>NCC 'A' Certificate</strong> Holder</li>
-                <li>🏫 Ex-Cadet <strong>Sainik School Purulia</strong></li>
-                <li>🏐 Expert <strong>Volleyball</strong> Player</li>
-                <li>🐎 Skilled <strong>Horse Rider</strong></li>
-                <li>🎤 Average Public Speaker</li>
-            </ul>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <div class="icon-box"><i class="fas fa-university"></i></div>
+                    <div class="ach-text">
+                        <h4>Sainik School Purulia</h4>
+                        <p>Ex-Cadet</p>
+                    </div>
+                </div>
+                <div class="achievement-card">
+                    <div class="icon-box"><i class="fas fa-medal"></i></div>
+                    <div class="ach-text">
+                        <h4>NCC 'A'</h4>
+                        <p>Certificate Holder</p>
+                    </div>
+                </div>
+                <div class="achievement-card">
+                    <div class="icon-box"><i class="fas fa-volleyball-ball"></i></div>
+                    <div class="ach-text">
+                        <h4>Volleyball</h4>
+                        <p>Expert Athlete</p>
+                    </div>
+                </div>
+                <div class="achievement-card">
+                    <div class="icon-box"><i class="fas fa-horse-head"></i></div>
+                    <div class="ach-text">
+                        <h4>Horse Riding</h4>
+                        <p>Skilled Rider</p>
+                    </div>
+                </div>
+                <div class="achievement-card">
+                    <div class="icon-box"><i class="fas fa-microphone-alt"></i></div>
+                    <div class="ach-text">
+                        <h4>Public Speaker</h4>
+                        <p>Good Speaker</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Tile 4: Experience / My Journey -->
         <div class="bento-tile tile-exp">
             <h3>My Journey</h3>
-            <p>From innovating at <strong>Atal Innovation Mission (NITI Aayog)</strong> to building freelance web
-                solutions.</p>
-            <p class="small-text">Bridging the gap between <strong>hardware IoT</strong> and modern <strong>full-stack
-                    development</strong>.</p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>Freelance Developer</h4>
+                        <span>Present</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>Polaris School of Tech</h4>
+                        <span>Student</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>NITI Aayog (AIM)</h4>
+                        <span>Innovator</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Tile 5: Project 1 (ProfileHub) -->
-        <div class="bento-tile tile-project p1" id="projects">
-            <div class="project-content">
-                <div class="project-tag">Full Stack App</div>
-                <h4>ProfileHub</h4>
-                <p>A full-stack web application that allows users to create and manage a personalized public profile
-                    through a unique URL. It features secure authentication, editable profile content, and media
-                    uploads, and is built with <strong>Django</strong>, <strong>PostgreSQL</strong>, and modern cloud
-                    deployment practices.</p>
-                <div class="project-links" style="margin-top: 1rem;">
-                    <a href="https://eight-byte.onrender.com/" target="_blank" class="project-link"
-                        style="margin-right: 15px;">Live <i class="fas fa-external-link-alt"></i></a>
-                    <a href="https://github.com/Roy-code5k/Django_User_Auth" target="_blank" class="project-link">GitHub
-                        <i class="fab fa-github"></i></a>
+        <!-- Tile 5: Projects Gallery -->
+        <div class="bento-tile tile-gallery" id="projects">
+            <h3 style="grid-column: 1 / -1; margin-bottom: 0;">Featured Projects</h3>
+            <div class="gallery-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #2a1b2d, #18181b);">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="project-info">
+                        <div class="project-tag">Full Stack</div>
+                        <h4>ProfileHub (Django)</h4>
+                        <p>Secure authentication & profile management system with PostgreSQL.</p>
+                        <div class="project-links">
+                            <a href="https://eight-byte.onrender.com/" target="_blank">Live</a>
+                            <a href="https://github.com/Roy-code5k/Django_User_Auth" target="_blank">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #1d2a35, #18181b);">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="project-info">
+                        <div class="project-tag">IoT & C++</div>
+                        <h4>Home Security</h4>
+                        <p>Real-time surveillance system integrating hardware sensors.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/Roy-code5k/Home-Security-System" target="_blank">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-image" style="background: linear-gradient(135deg, #2a251b, #18181b);">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="project-info">
+                        <div class="project-tag">Freelance</div>
+                        <h4>Neuroconsultation</h4>
+                        <p>Medical portfolio for Dr. Parth with patient resource management.</p>
+                        <div class="project-links">
+                            <a href="https://parthsorathiya.vercel.app/" target="_blank">Live</a>
+                            <a href="https://github.com/Roy-code5k/dr-parth-portfolio-website"
+                                target="_blank">GitHub</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Tile 6: Project 2 (Home Security System) -->
-        <div class="bento-tile tile-project p2">
-            <div class="project-content">
-                <div class="project-tag">IoT & C++</div>
-                <h4>Home Security System</h4>
-                <p>Advanced surveillance system integrating hardware sensors for real-time home safety.</p>
-                <div class="project-links" style="margin-top: 1rem;">
-                    <a href="https://github.com/Roy-code5k/Home-Security-System" target="_blank"
-                        class="project-link">GitHub <i class="fab fa-github"></i></a>
-                </div>
-            </div>
-        </div>
+        <!-- Tile 8: Contact Removed for Dock -->
 
-        <!-- Tile 7: Project 3 (Freelance) -->
-        <div class="bento-tile tile-project p3">
-            <div class="project-content">
-                <div class="project-tag">Freelance Website</div>
-                <h4>Dr. Parth's Neuroconsultation</h4>
-                <p>Professional medical portfolio designed for a neurologist, featuring responsive design and patient
-                    resource management.</p>
-                <div class="project-links" style="margin-top: 1rem;">
-                    <a href="https://parthsorathiya.vercel.app/" target="_blank" class="project-link"
-                        style="margin-right: 15px;">Live <i class="fas fa-external-link-alt"></i></a>
-                    <a href="https://github.com/Roy-code5k/dr-parth-portfolio-website" target="_blank"
-                        class="project-link">GitHub <i class="fab fa-github"></i></a>
-                </div>
-            </div>
-        </div>
+    </main>
 
-        <!-- Tile 8: Contact / Socials -->
-        <div class="bento-tile tile-contact" id="contact">
-            <h3>Let's Connect</h3>
-            <p>Ready to build the next big thing? Reach out on social.</p>
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/hrituraj-roy-12340a299/" target="_blank" class="social-btn"
-                    style="background: linear-gradient(45deg, #0077b5, #00a0dc); border: none;"><i
-                        class="fab fa-linkedin"></i> LinkedIn</a>
-                <a href="https://github.com/Roy-code5k" target="_blank" class="social-btn"
-                    style="background: linear-gradient(45deg, #2b3137, #484f58); border: none;"><i
-                        class="fab fa-github"></i> GitHub</a>
-                <a href="https://www.instagram.com/cdt.hrituraj_roy/" target="_blank" class="social-btn"
-                    style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888, #8a3ab9); border: none;"><i
-                        class="fab fa-instagram"></i> Instagram</a>
-            </div>
-        </div>
+    <!-- Floating Social Dock -->
+    <div class="floating-dock">
+        <a href="mailto:hriturajroy2005@gmail.com" class="dock-item" data-tooltip="Email">
+            <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/hrituraj-roy-12340a299/" target="_blank" class="dock-item"
+            data-tooltip="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://github.com/Roy-code5k" target="_blank" class="dock-item" data-tooltip="GitHub">
+            <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.instagram.com/cdt.hrituraj_roy/" target="_blank" class="dock-item"
+            data-tooltip="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+    </div>
 
     </main>
 
