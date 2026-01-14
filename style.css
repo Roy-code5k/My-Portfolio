@@ -1,0 +1,482 @@
+:root {
+    --bg-color: #0f0f11;
+    --card-bg: #18181b;
+    --card-hover: #27272a;
+    --text-primary: #ffffff;
+    --text-muted: #a1a1aa;
+    --accent-pink: #FF2E63;
+    --accent-orange: #FF9F1C;
+    --gradient-text: linear-gradient(135deg, var(--accent-pink), var(--accent-orange));
+
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+
+    --gap: 1.5rem;
+    --radius: 24px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* 1. Grain Texture */
+.grain-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9000;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* 2. Ambient Background Glows */
+.bg-blob {
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.4;
+    /* Increased opacity for visibility */
+    z-index: 0;
+    /* Brought forward from -1 */
+    pointer-events: none;
+    animation: blobFloat 20s infinite alternate;
+}
+
+.blob-1 {
+    top: -100px;
+    left: -100px;
+    background: var(--accent-pink);
+}
+
+.blob-2 {
+    bottom: -100px;
+    right: -100px;
+    background: var(--accent-orange);
+    animation-delay: -5s;
+}
+
+@keyframes blobFloat {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(50px, 50px) scale(1.2);
+    }
+}
+
+/* Custom Cursor */
+.cursor-dot,
+.cursor-outline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-pink);
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--accent-pink);
+    opacity: 0.5;
+    transition: 0.2s;
+}
+
+/* Bento Container */
+.bento-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, minmax(180px, auto));
+    gap: var(--gap);
+    max-width: 1200px;
+    width: 100%;
+}
+
+/* Tile Basics */
+.bento-tile {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, background 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+
+    /* Initial Animation State */
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.bento-tile:hover {
+    transform: translateY(-5px);
+    background: var(--card-hover);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+/* Typography */
+h1 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+h4 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.gradient-text {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background: var(--text-primary);
+    color: var(--bg-color);
+}
+
+.btn-primary:hover {
+    background: var(--accent-pink);
+    color: white;
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    margin-left: 0.5rem;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* GRID AREAS & SPECIFIC TILE STYLES */
+
+/* Intro Tile: Top Left, 2x2 */
+.tile-intro {
+    grid-column: span 2;
+    grid-row: span 2;
+    background: linear-gradient(to bottom right, #18181b, #121214);
+    justify-content: center;
+}
+
+.status-badge {
+    display: inline-block;
+    background: rgba(46, 255, 116, 0.1);
+    color: #2eff74;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(46, 255, 116, 0.2);
+}
+
+/* Stack Tile: Top Right 1, 1x2 */
+.tile-stack {
+    grid-column: span 1;
+    grid-row: span 2;
+    overflow: hidden;
+    /* Hide scrollbar for marquee */
+    padding-left: 0;
+    padding-right: 0;
+    /* Full width for marquee */
+    justify-content: flex-start;
+    /* Anchor content to top */
+    position: relative;
+    /* Anchor for absolute marquee */
+    padding-top: 1.5rem;
+    /* Reduce top padding slightly */
+}
+
+.tile-stack h3 {
+    padding-left: 2rem;
+    z-index: 10;
+    /* Keep title above marquee */
+    position: relative;
+    margin-top: 0.5rem;
+    /* Remove extra margin */
+    margin-bottom: 0;
+}
+
+.marquee-wrapper {
+    position: absolute;
+    top: 70px;
+    /* Start below title */
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+    /* Fade vertical edges */
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 2rem;
+    animation: scrollVertical 20s linear infinite;
+    /* Vertical scroll for tall tile */
+}
+
+/* Re-orient for vertical since tile-stack is tall (1x2) */
+@keyframes scrollVertical {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-50%);
+    }
+}
+
+.stack-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    color: var(--text-primary);
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stack-item i {
+    color: var(--accent-orange);
+}
+
+/* Athlete Tile: Second Row, span 2 height */
+.tile-athlete {
+    grid-column: span 1;
+    grid-row: span 2;
+    background: linear-gradient(to bottom, #18181b, #221818);
+}
+
+.achievements-list {
+    list-style: none;
+}
+
+.achievements-list li {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+    font-size: 0.9rem;
+}
+
+.achievements-list li::before {
+    content: '•';
+    color: var(--accent-pink);
+    position: absolute;
+    left: 0;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+/* Experience: Below Athlete */
+.tile-exp {
+    grid-column: span 1;
+    grid-row: span 1;
+    background: #1a1500;
+    /* Subtle gold tint hint */
+    border-color: rgba(255, 159, 28, 0.1);
+}
+
+/* Projects */
+.tile-project {
+    grid-column: span 1;
+    grid-row: span 1;
+    background-size: cover;
+    background-position: center;
+    justify-content: flex-end;
+}
+
+.tile-project::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    z-index: 1;
+}
+
+.project-content {
+    position: relative;
+    z-index: 2;
+}
+
+.project-tag {
+    font-size: 0.75rem;
+    color: var(--accent-orange);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.project-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+/* Specific Project Backgrounds (Gradients for now) */
+.p1 {
+    background: radial-gradient(circle at top right, #2a1b2d, #18181b);
+    grid-column: span 2;
+}
+
+.p2 {
+    background: radial-gradient(circle at bottom left, #1d2a35, #18181b);
+}
+
+.p3 {
+    background: radial-gradient(circle at center, #2a251b, #18181b);
+}
+
+/* Contact Tile */
+.tile-contact {
+    grid-column: span 1;
+    grid-row: span 1;
+    background: var(--accent-pink);
+    color: white;
+}
+
+.tile-contact h3,
+.tile-contact p,
+.tile-contact a {
+    color: white;
+}
+
+.tile-contact .social-links {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.social-btn {
+    font-weight: 600;
+    opacity: 0.9;
+
+    /* Flex alignment for icons */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.social-btn:hover {
+    opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .bento-container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+    }
+
+    .tile-intro {
+        grid-column: span 2;
+    }
+
+    .tile-stack {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .tile-athlete {
+        grid-column: span 1;
+        grid-row: span 2;
+    }
+
+    .p1 {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+        display: block;
+    }
+
+    .bento-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+}
