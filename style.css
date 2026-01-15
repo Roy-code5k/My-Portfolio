@@ -3,7 +3,7 @@
     --card-bg: #18181b;
     --card-hover: #27272a;
     --text-primary: #ffffff;
-    --text-muted: #a1a1aa;
+    --text-muted: #c4c4cc;
     --accent-pink: #FF2E63;
     --accent-orange: #FF9F1C;
     --gradient-text: linear-gradient(135deg, var(--accent-pink), var(--accent-orange));
@@ -127,32 +127,35 @@ body {
     padding: 2rem;
     position: relative;
     overflow: hidden;
-    transition: transform 0.3s ease, background 0.3s ease;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.05);
     display: flex;
     flex-direction: column;
     opacity: 0;
     transform: translateY(20px);
+    transform-style: preserve-3d;
+    perspective: 1000px;
 }
 
 .bento-tile:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) rotateX(2deg) rotateY(-2deg);
     background: var(--card-hover);
     border-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 46, 99, 0.1);
 }
 
 /* Typography */
 h1 {
     font-family: var(--font-heading);
     font-size: 3rem;
+    font-weight: 300;
     line-height: 1.1;
     margin-bottom: 0.5rem;
 }
 
 h2 {
     font-size: 1.25rem;
-    font-weight: 500;
+    font-weight: 400;
     color: var(--text-muted);
     margin-bottom: 1.5rem;
 }
@@ -160,17 +163,20 @@ h2 {
 h3 {
     font-family: var(--font-heading);
     font-size: 1.5rem;
+    font-weight: 600;
     margin-bottom: 1.5rem;
 }
 
 h4 {
     font-size: 1.25rem;
+    font-weight: 700;
     margin-bottom: 0.5rem;
 }
 
 p {
     color: var(--text-muted);
     font-size: 0.95rem;
+    font-weight: 400;
     line-height: 1.6;
 }
 
