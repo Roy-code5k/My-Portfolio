@@ -5,6 +5,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let mouseX = 0;
     let mouseY = 0;
+    let outlineX = 0, outlineY = 0;
+
+    // Particle Trail System
+    let particleCount = 0;
+    const maxParticles = 50;
+
+    function createParticle(x, y) {
+        if (particleCount >= maxParticles) return;
+
+        const particle = document.createElement('div');
+        particle.className = 'cursor-particle';
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+
+        document.body.appendChild(particle);
+        particleCount++;
+
+        setTimeout(() => {
+            particle.remove();
+            particleCount--;
+        }, 800);
+    }
 
     if (cursorDot && cursorOutline) {
         window.addEventListener('mousemove', (e) => {
@@ -14,25 +36,33 @@ document.addEventListener('DOMContentLoaded', () => {
             cursorDot.style.left = `${mouseX}px`;
             cursorDot.style.top = `${mouseY}px`;
 
-            cursorOutline.animate({
-                left: `${mouseX}px`,
-                top: `${mouseY}px`
-            }, { duration: 500, fill: "forwards" });
+            // Create particle trail
+            createParticle(e.clientX, e.clientY);
         });
+
+        // Smooth cursor outline animation
+        function animateOutline() {
+            outlineX += (mouseX - outlineX) * 0.15;
+            outlineY += (mouseY - outlineY) * 0.15;
+
+            cursorOutline.style.left = outlineX + 'px';
+            cursorOutline.style.top = outlineY + 'px';
+
+            requestAnimationFrame(animateOutline);
+        }
+        animateOutline();
     }
 
-    // 2. Staggered Animation for Tiles (Reveal w/ fallback)
+    // 2. Staggered Animation for Tiles
     const tiles = document.querySelectorAll('.bento-tile');
     tiles.forEach((tile, index) => {
-        tile.style.opacity = '0';
-        tile.style.transform = 'translateY(20px)';
         setTimeout(() => {
             tile.style.opacity = '1';
             tile.style.transform = 'translateY(0)';
-        }, 100 + (index * 100));
+        }, index * 100);
     });
 
-    // 3. Interactive Fluid Gradient Animation
+    // 4. Interactive Fluid Gradient Animation (Original section 3, now 4)
     const canvas = document.getElementById('particle-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
