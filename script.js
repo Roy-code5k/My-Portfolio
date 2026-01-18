@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             tile.style.opacity = '1';
             tile.style.transform = 'translateY(0)';
-        }, index * 100);
+        }, index * 300);
     });
 
     // 4. Interactive Fluid Gradient Animation (Original section 3, now 4)
