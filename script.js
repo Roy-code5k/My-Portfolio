@@ -62,6 +62,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }, index * 300);
     });
 
+    // 3. Project Card Click Handlers
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach(card => {
+        card.style.cursor = 'pointer';
+
+        card.addEventListener('click', (e) => {
+            // Don't trigger if user clicked on a link directly
+            if (e.target.tagName === 'A') return;
+
+            const liveLink = card.querySelector('a[href*="http"]:not([href*="github"])');
+            const githubLink = card.querySelector('a[href*="github"]');
+
+            // Prefer Live link, fallback to GitHub
+            const targetLink = liveLink || githubLink;
+
+            if (targetLink) {
+                window.open(targetLink.href, '_blank');
+            }
+        });
+    });
+
     // 4. Interactive Fluid Gradient Animation (Original section 3, now 4)
     const canvas = document.getElementById('particle-canvas');
     if (canvas) {
