@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             tile.style.opacity = '1';
             tile.style.transform = 'translateY(0)';
-        }, index * 300);
+        }, index * 150);
     });
 
     // 3. Project Card Click Handlers
@@ -185,5 +185,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
         init();
         animate();
+    }
+
+    // 5. Name Scramble/Glitch Effect (Hrituraj Roy)
+    const firstName = document.getElementById('name-text');
+    const surname = document.getElementById('surname-text');
+    const headerName = document.getElementById('header-name');
+
+    if (firstName && surname) {
+        // Aesthetic tech characters (Katakana + Glyphs)
+        const randomChars = "XYZ0123456789/<>[]{}—=+*^?#________";
+
+        const scrambleElement = (element, originalText) => {
+            let iterations = 0;
+
+            const interval = setInterval(() => {
+                element.innerText = originalText
+                    .split("")
+                    .map((letter, index) => {
+                        // If we've passed this index, show the real letter
+                        if (index < iterations) {
+                            return originalText[index];
+                        }
+                        // Otherwise show a random cool character
+                        return randomChars[Math.floor(Math.random() * randomChars.length)];
+                    })
+                    .join("");
+
+                // Stop when done
+                if (iterations >= originalText.length) {
+                    clearInterval(interval);
+                    element.innerText = originalText;
+                }
+
+                // Tuned speed: slow start, then accelerates
+                iterations += 1 / 3;
+            }, 30); // Faster update rate (30ms) for smoother scramble
+        }
+
+        const triggerScramble = () => {
+            // Reveal text container
+            firstName.style.opacity = '1';
+            surname.style.opacity = '1';
+
+            // Stagger animations slightly for 'flowing' feel
+            scrambleElement(firstName, "Hrituraj");
+            setTimeout(() => {
+                scrambleElement(surname, "Roy");
+            }, 100);
+        };
+
+        // Run on load with start delay
+        setTimeout(triggerScramble, 800);
     }
 });
